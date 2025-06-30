@@ -1,0 +1,10 @@
+{
+  "name": "n8n-workflow-template",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "bash start.sh"
+  },
+  "dependencies": {
+    "n8n": "^1.46.0"
+  }
+}
