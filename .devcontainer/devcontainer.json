@@ -1,0 +1,14 @@
+{
+    "name": "n8n-dev",
+    "build": {
+      "dockerfile": "Dockerfile"
+    },
+    "forwardPorts": [5678],
+    "postCreateCommand": "npm install && npm run start",
+    "customizations": {
+      "vscode": {
+        "settings": {},
+        "extensions": ["dbaeumer.vscode-eslint"]
+      }
+    }
+  }
