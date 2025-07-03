@@ -1,8 +1,7 @@
 #!/bin/bash
 
-set -e  # Exit immediately if a command exits with a non-zero status
+set -e
 
-# Function to print error and exit
 function error_exit {
   echo "❌ Error: $1" >&2
   exit 1
@@ -14,11 +13,16 @@ if ! command -v docker &> /dev/null; then
   curl -fsSL https://get.docker.com | sh || error_exit "Docker installation failed"
 fi
 
+# Ensure Docker daemon is running
+if ! docker info > /dev/null 2>&1; then
+  echo "Docker is installed but not running. Starting Docker..."
+  service docker start || error_exit "Docker service failed to start"
+fi
+
 # Ensure Docker Compose is installed
 if ! command -v docker-compose &> /dev/null; then
   echo "Docker Compose not found. Installing..."
-  curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" \
-    -o /usr/local/bin/docker-compose || error_exit "Docker Compose download failed"
+  curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose || error_exit "Docker Compose download failed"
   chmod +x /usr/local/bin/docker-compose
   ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose || true
 fi
@@ -45,7 +49,6 @@ for file in ./workflows/*.json; do
     echo "📄 Importing $file"
     docker exec $(docker ps -qf "ancestor=n8nio/n8n") n8n import:workflow --input "/workflows/$(basename $file)" || echo "⚠️ Failed to import $file"
   fi
-
 done
 
 echo "✅ n8n setup complete and workflows imported."
