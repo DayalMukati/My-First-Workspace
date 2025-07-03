@@ -1,16 +1,12 @@
-# .devcontainer/Dockerfile
-FROM node:18
+FROM mcr.microsoft.com/devcontainers/base:ubuntu-22.04
 
-# Install necessary dependencies
+# Install basic dependencies
 RUN apt-get update && \
-    apt-get install -y python3-pip curl gnupg && \
-    npm install -g n8n
+    apt-get install -y \
+      curl \
+      ca-certificates \
+      jq \
+      && rm -rf /var/lib/apt/lists/*
 
-# Create working directories
-RUN mkdir -p /root/.n8n /workflows
-
-# Copy custom startup script (copied from repo root, not inside .devcontainer)
-COPY init.sh /init.sh
-RUN chmod +x /init.sh
-
-CMD ["/init.sh"]
+# Set working directory
+WORKDIR /workspaces/n8n-codespace-template

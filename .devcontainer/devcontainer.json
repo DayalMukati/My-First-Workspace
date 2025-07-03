@@ -3,18 +3,10 @@
   "build": {
     "dockerfile": "Dockerfile"
   },
-  "customizations": {
-    "vscode": {
-      "settings": {},
-      "extensions": [
-        "dbaeumer.vscode-eslint"
-      ]
-    }
-  },
   "forwardPorts": [5678],
-  "postCreateCommand": "/init.sh",
+  "postCreateCommand": "bash ./init.sh",
   "remoteUser": "root",
-  "mounts": [
-    "source=${localWorkspaceFolder}/workflows,target=/workflows,type=bind"
-  ]
+  "features": {
+    "ghcr.io/devcontainers/features/docker-in-docker:2": {}
+  }
 }
