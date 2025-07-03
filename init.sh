@@ -7,14 +7,16 @@ function error_exit {
   exit 1
 }
 
+echo "🚀 Starting n8n with Docker on Ubuntu 24..."
+
 echo "🔍 Checking Docker availability..."
 if ! command -v docker &> /dev/null; then
   error_exit "Docker not found. Please ensure Docker is properly installed."
 fi
 
-# Quick Docker daemon check (reduced timeout)
+# Quick Docker daemon check (optimized for Ubuntu 24)
 echo "⌛ Checking Docker daemon..."
-timeout=15
+timeout=10  # Reduced timeout for preinstalled image
 count=0
 while ! docker info > /dev/null 2>&1; do
   if [ $count -ge $timeout ]; then
@@ -40,14 +42,14 @@ echo "🚀 Starting n8n via Docker Compose..."
 $COMPOSE_CMD up -d || error_exit "Failed to start Docker Compose"
 
 echo "⌛ Waiting for n8n to be ready..."
-timeout=30  # Reduced from 120s
+timeout=20  # Optimized timeout for Ubuntu 24
 count=0
 until curl -s -f http://localhost:5678/healthz > /dev/null 2>&1; do
   if [ $count -ge $timeout ]; then
     error_exit "n8n failed to start within $timeout seconds"
   fi
   echo "   n8n not ready yet, waiting... ($count/$timeout)"
-  sleep 2  # Reduced from 5s
+  sleep 2
   ((count+=2))
 done
 
@@ -69,7 +71,7 @@ else
 fi
 
 echo ""
-echo "✅ n8n setup complete in ~30 seconds!"
+echo "✅ n8n setup complete with Ubuntu 24 + Docker!"
 echo "🌐 n8n is now available at: http://localhost:5678"
 echo "🔐 Login credentials:"
 echo "   Username: admin"

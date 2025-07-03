@@ -1,12 +1,15 @@
 {
-  "name": "n8n-codespace-ultra-fast",
-  "image": "mcr.microsoft.com/devcontainers/javascript-node:18",
+  "name": "n8n-codespace-ubuntu24",
+  "image": "mcr.microsoft.com/devcontainers/base:ubuntu-24.04",
   "forwardPorts": [5678],
-  "postCreateCommand": "bash ./init-fast.sh",
-  "remoteUser": "node",
+  "postCreateCommand": "bash ./init.sh",
+  "remoteUser": "vscode",
   "customizations": {
     "codespaces": {
       "openFiles": ["README.md"]
     }
+  },
+  "features": {
+    "ghcr.io/devcontainers/features/docker-outside-of-docker:1": {}
   }
 }
