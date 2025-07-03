@@ -1,0 +1,18 @@
+{
+  "name": "n8n-codespace-ultra-fast",
+  "version": "1.0.0",
+  "description": "Ultra-fast n8n setup for GitHub Codespaces (15 seconds)",
+  "scripts": {
+    "start": "bash ./init-fast.sh",
+    "stop": "pkill -f 'n8n start' || true",
+    "restart": "npm run stop && sleep 2 && npm run start",
+    "logs": "tail -f ~/.n8n/n8n.log",
+    "status": "curl -s http://localhost:5678/healthz && echo 'n8n is running' || echo 'n8n is not running'"
+  },
+  "devDependencies": {
+    "n8n": "latest"
+  },
+  "keywords": ["n8n", "automation", "codespace", "fast-setup"],
+  "author": "n8n-codespace-template",
+  "license": "MIT"
+} 

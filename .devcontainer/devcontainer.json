@@ -1,15 +1,12 @@
 {
-  "name": "n8n-codespace-fast",
-  "image": "mcr.microsoft.com/devcontainers/universal:2",
+  "name": "n8n-codespace-ultra-fast",
+  "image": "mcr.microsoft.com/devcontainers/javascript-node:18",
   "forwardPorts": [5678],
-  "postCreateCommand": "bash ./init.sh",
-  "remoteUser": "codespace",
+  "postCreateCommand": "bash ./init-fast.sh",
+  "remoteUser": "node",
   "customizations": {
     "codespaces": {
       "openFiles": ["README.md"]
     }
-  },
-  "features": {
-    "ghcr.io/devcontainers/features/docker-outside-of-docker:1": {}
   }
 }
