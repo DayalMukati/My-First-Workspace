@@ -8,10 +8,9 @@ RUN apt-get update && \
 
 # Create working directories
 RUN mkdir -p /root/.n8n /workflows
-WORKDIR /workflows
 
-# Copy custom startup script
-COPY .devcontainer/init.sh /init.sh
+# Copy custom startup script (copied from repo root, not inside .devcontainer)
+COPY init.sh /init.sh
 RUN chmod +x /init.sh
 
 CMD ["/init.sh"]
