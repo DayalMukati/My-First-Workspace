@@ -1,14 +1,20 @@
 {
-    "name": "n8n-dev",
-    "build": {
-      "dockerfile": "Dockerfile"
-    },
-    "forwardPorts": [5678],
-    "postCreateCommand": "npm install && npm run start",
-    "customizations": {
-      "vscode": {
-        "settings": {},
-        "extensions": ["dbaeumer.vscode-eslint"]
-      }
+  "name": "n8n-codespace",
+  "build": {
+    "dockerfile": "Dockerfile"
+  },
+  "customizations": {
+    "vscode": {
+      "settings": {},
+      "extensions": [
+        "dbaeumer.vscode-eslint"
+      ]
     }
-  }
+  },
+  "forwardPorts": [5678],
+  "postCreateCommand": "/init.sh",
+  "remoteUser": "root",
+  "mounts": [
+    "source=${localWorkspaceFolder}/workflows,target=/workflows,type=bind"
+  ]
+}
