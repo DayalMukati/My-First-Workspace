@@ -1,12 +1,15 @@
 {
-  "name": "n8n-codespace",
-  "build": {
-    "dockerfile": "Dockerfile"
-  },
+  "name": "n8n-codespace-fast",
+  "image": "mcr.microsoft.com/devcontainers/universal:2",
   "forwardPorts": [5678],
   "postCreateCommand": "bash ./init.sh",
-  "remoteUser": "root",
+  "remoteUser": "codespace",
+  "customizations": {
+    "codespaces": {
+      "openFiles": ["README.md"]
+    }
+  },
   "features": {
-    "ghcr.io/devcontainers/features/docker-in-docker:2": {}
+    "ghcr.io/devcontainers/features/docker-outside-of-docker:1": {}
   }
 }
