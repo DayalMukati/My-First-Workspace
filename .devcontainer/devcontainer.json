@@ -1,14 +1,10 @@
 {
-  "name": "n8n-codespace-ubuntu24",
-  "image": "mcr.microsoft.com/devcontainers/base:ubuntu-24.04",
+  "name": "n8n-codespace",
+  "image": "mcr.microsoft.com/devcontainers/base:ubuntu-22.04",
   "forwardPorts": [5678],
   "postCreateCommand": "bash ./init.sh",
+  "postStartCommand": "bash ./restart-containers.sh",
   "remoteUser": "vscode",
-  "customizations": {
-    "codespaces": {
-      "openFiles": ["README.md"]
-    }
-  },
   "features": {
     "ghcr.io/devcontainers/features/docker-outside-of-docker:1": {}
   }
